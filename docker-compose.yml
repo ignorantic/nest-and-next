@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+  main:
+    container_name: nn_main
+    links:
+      - mysql
+    build:
+      context: .
+      target: development
+    user: "1000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${SERVER_PORT}:${CONTAINER_PORT}
+      - 9229:9229
+    command: yarn dev
+    env_file:
+      - .env
+    networks:
+      - webnet
+    depends_on:
+      - mysql
+  mysql:
+    container_name: nn_mysql
+    image: mysql:5
+    restart: always
+    environment:
+      MYSQL_HOST: nn_mysql
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    ports:
+      - 3306:3306
+    networks:
+      - webnet
+    volumes:
+      - /home/snaut/var/mysqldata:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: nn_pma
+    links:
+      - mysql
+    environment:
+      PMA_HOST: nn_mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+    networks:
+      - webnet
+networks:
+  webnet:
