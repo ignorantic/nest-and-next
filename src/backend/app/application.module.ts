@@ -4,8 +4,10 @@ import { ConfigModule } from '@nestjs/config';
 import Next from 'next';
 import { RenderModule } from 'nest-next';
 import { AppController } from './app.controller';
-import { User } from '../users/user.entity';
+import { User } from '../users/users.entity';
+import { Post } from '../posts/posts.entity';
 import { UsersModule } from '../users/users.module';
+import { PostsModule } from '../posts/posts.module';
 
 @Module({
   imports: [
@@ -24,10 +26,11 @@ import { UsersModule } from '../users/users.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [User],
+      entities: [User, Post],
       synchronize: true,
     }),
     UsersModule,
+    PostsModule,
   ],
   controllers: [AppController],
 })
