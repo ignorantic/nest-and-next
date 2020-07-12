@@ -8,7 +8,7 @@ services:
     build:
       context: .
       target: development
-    user: "1000"
+    user: ${UID}
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
