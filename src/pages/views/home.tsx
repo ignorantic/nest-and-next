@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { NextPage, NextPageContext } from 'next';
 
 function useUsers() {
-  const [ users, setUsers ] = useState<string>();
+  const [users, setUsers] = useState<string>();
 
   useEffect(
     () => {
-      fetch("/api/posts")
-        .then(response => response.json())
-        .then(json => setUsers(JSON.stringify(json)));
+      fetch('/api/posts')
+        .then((response) => response.json())
+        .then((json) => setUsers(JSON.stringify(json)));
     },
-    []
+    [],
   );
 
   return users;
@@ -25,13 +25,20 @@ const Home: NextPage<Props> = ({ query }) => {
   const users = useUsers();
   return (
     <div>
-      <h1>Hello, {greetName}!</h1>
-      <p>Users: {users}</p>
+      <h1>
+        Hello,
+        {greetName}
+        !
+      </h1>
+      <p>
+        Users:
+        {users}
+      </p>
     </div>
   );
 };
 
-Home.getInitialProps = async (ctx: NextPageContext) => {
+Home.getInitialProps = (ctx: NextPageContext) => {
   const { query } = ctx;
   return { query };
 };

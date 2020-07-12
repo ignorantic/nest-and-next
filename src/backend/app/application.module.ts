@@ -36,5 +36,5 @@ import { PostsModule } from '../posts/posts.module';
   ],
   controllers: [AppController],
 })
-export class AppModule {}
 
+export class AppModule {}

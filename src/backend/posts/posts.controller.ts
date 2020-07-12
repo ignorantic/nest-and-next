@@ -4,11 +4,11 @@ import { Post } from './posts.entity';
 import { PostsService } from './posts.service';
 
 @Crud({
-	model: {
-		type: Post,
-	},
+  model: {
+    type: Post,
+  },
 })
 @Controller('api/posts')
 export class PostsController {
-	constructor (public service: PostsService) {}
+  constructor(public service: PostsService) {}
 }
