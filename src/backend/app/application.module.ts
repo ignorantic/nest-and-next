@@ -6,6 +6,7 @@ import { RenderModule } from 'nest-next';
 import { AppController } from './app.controller';
 import { User } from '../users/users.entity';
 import { Post } from '../posts/posts.entity';
+import { AdminModule } from '../admin/admin.module';
 import { UsersModule } from '../users/users.module';
 import { PostsModule } from '../posts/posts.module';
 
@@ -31,6 +32,7 @@ import { PostsModule } from '../posts/posts.module';
     }),
     UsersModule,
     PostsModule,
+    AdminModule,
   ],
   controllers: [AppController],
 })
