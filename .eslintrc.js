@@ -50,6 +50,8 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
 
+    'jsx-a11y/anchor-is-valid': 0,
+
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 1,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 1,
 

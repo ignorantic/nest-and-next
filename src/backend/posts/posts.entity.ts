@@ -1,7 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { CommonPost } from '../../common/interfaces';
 
 @Entity()
-export class Post {
+export class Post implements CommonPost {
   @PrimaryGeneratedColumn()
   id: number;
 

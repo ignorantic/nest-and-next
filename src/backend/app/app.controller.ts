@@ -1,12 +1,24 @@
 import {
-  Controller, Get, Query, Render,
+  Controller, Get, Param, Render,
 } from '@nestjs/common';
 
 @Controller()
 export class AppController {
-  @Render('home')
+  @Render('index')
   @Get()
-  public index(@Query('name') name?: string) {
-    return { name };
+  public index() {
+    return {};
+  }
+
+  @Render('post')
+  @Get('post')
+  public postList() {
+    return {};
+  }
+
+  @Render('post/[id]')
+  @Get('post/:id')
+  public post(@Param('id') id?: string) {
+    return { id: Number(id) };
   }
 }

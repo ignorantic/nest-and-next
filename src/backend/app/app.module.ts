@@ -19,6 +19,9 @@ import { PostsModule } from '../posts/posts.module';
       Next({
         dev: process.env.NODE_ENV !== 'production',
       }),
+      {
+        viewsDir: '',
+      },
     ),
     TypeOrmModule.forRoot({
       type: 'mysql',
