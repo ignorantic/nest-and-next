@@ -9,12 +9,12 @@ services:
     networks:
       - webnet
     depends_on:
-      - main
+      - nestjs
     volumes:
       - ./config/nginx:/etc/nginx/conf.d
-      - ./public:/www/public
-  main:
-    container_name: nn_main
+      - ${STATIC_PATH}:/www/public
+  nestjs:
+    container_name: nn_nestjs
     links:
       - mysql
     build:
@@ -25,8 +25,7 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - 3000:3000
-      - 9229:9229
+      - ${NEST_PORT}:${NEST_PORT}
     command: yarn dev
     env_file:
       - .env
@@ -48,7 +47,7 @@ services:
     networks:
       - webnet
     volumes:
-      - /home/snaut/var/mysqldata:/var/lib/mysql
+      - ${DB_PATH}:/var/lib/mysql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: nn_pma
