@@ -10,14 +10,14 @@ export class AppController {
     return {};
   }
 
-  @Render('post')
-  @Get('post')
+  @Render('posts')
+  @Get('posts')
   public postList() {
     return {};
   }
 
-  @Render('post/[id]')
-  @Get('post/:id')
+  @Render('posts/[id]')
+  @Get('posts/:id')
   public post(@Param('id') id?: string) {
     return { id: Number(id) };
   }

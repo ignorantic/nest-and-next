@@ -26,6 +26,7 @@ services:
       - /usr/src/app/node_modules
     ports:
       - ${NEST_PORT}:${NEST_PORT}
+      - 9229:9229
     command: yarn dev
     env_file:
       - .env
