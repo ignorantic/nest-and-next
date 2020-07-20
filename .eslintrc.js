@@ -35,6 +35,7 @@ module.exports = {
   rules: {
     'no-useless-constructor': 0,
     'class-methods-use-this': 0,
+    'no-use-before-define': [2, { functions: false }],
 
     'import/prefer-default-export': 0,
     'import/no-cycle': 0,
@@ -45,6 +46,7 @@ module.exports = {
       tsx: 'never',
     }],
 
+    'react/react-in-jsx-scope': 0,
     'react/prop-types': 0,
     'react/jsx-fragments': 0,
     'react/jsx-props-no-spreading': 0,

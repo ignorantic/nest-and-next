@@ -1,19 +1,11 @@
 import React, { ComponentType } from 'react';
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
-import { Provider } from 'react-redux';
-import { Store } from 'redux';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { is } from 'ramda';
 
-import { wrapper } from '../frontend/store';
-import Layout from '../frontend/layout';
-import theme from '../frontend/theme';
+import FrontendRoot from '../frontend/frontend-root';
 
-interface AppProps {
+interface AppProps extends AppInitialProps {
   Component: ComponentType;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  pageProps: object;
-  store: Store;
 }
 
 class App extends NextApp<AppProps> {
@@ -26,24 +18,42 @@ class App extends NextApp<AppProps> {
   }
 
   componentDidMount(): void {
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
+    removeJssStyles();
   }
 
   render(): JSX.Element {
-    const { Component, pageProps } = this.props;
+    const {
+      router,
+      Component,
+    } = this.props;
+
+    const pageProps = getValidPageProps(this.props.pageProps);
+
+    if (isAdmin(router.route)) {
+      return <Component {...pageProps} />;
+    }
 
     return (
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </MuiThemeProvider>
+      <FrontendRoot initialState={{}} initialProps={{}}>
+        <Component {...pageProps} />
+      </FrontendRoot>
     );
   }
 }
 
-export default wrapper.withRedux(App);
+export default App;
+
+function removeJssStyles(): void {
+  const jssStyles = document.querySelector('#jss-server-side');
+  if (jssStyles && jssStyles.parentNode) {
+    jssStyles.parentNode.removeChild(jssStyles);
+  }
+}
+
+function isAdmin(route: string): boolean {
+  return route === '/admin';
+}
+
+function getValidPageProps(pageProps: unknown): Record<string, unknown> {
+  return is(Object, pageProps) ? pageProps as Record<string, unknown> : {};
+}

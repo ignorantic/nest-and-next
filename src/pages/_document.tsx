@@ -81,5 +81,4 @@ class EnhanceDocument extends Document {
   }
 }
 
-// noinspection JSUnusedGlobalSymbols
 export default EnhanceDocument;
