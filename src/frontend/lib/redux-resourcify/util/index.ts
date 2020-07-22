@@ -1,2 +1,2 @@
 export * from './fetch';
-export * from './getFetchedAt';
+export * from './get-fetched-at';

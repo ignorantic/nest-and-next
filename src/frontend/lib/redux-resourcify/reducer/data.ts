@@ -13,7 +13,7 @@ import {
   UPDATE_MANY,
 } from '../actions';
 
-import getFetchedAt from '../util/getFetchedAt';
+import getFetchedAt from '../util/get-fetched-at';
 import { Record, Identifier } from '../types';
 
 /**

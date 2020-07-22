@@ -5,7 +5,7 @@ import Document, {
 import { AppType, RenderPageResult } from 'next/dist/next-server/lib/utils';
 import { ServerStyleSheets as ServerMaterialStyleSheets } from '@material-ui/styles';
 import theme from '../frontend/theme';
-import EnvScript from '../frontend/components/EnvScript';
+import EnvScript from '../frontend/components/env-script';
 
 class EnhanceDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {

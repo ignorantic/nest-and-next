@@ -5,8 +5,8 @@ import {
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from './rootReducer';
-import makeRootSaga from './makeRootSaga';
+import rootReducer from './root-reducer';
+import makeRootSaga from './make-root-saga';
 import dataProvider from '../data-provider';
 
 interface Resource {

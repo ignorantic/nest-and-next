@@ -1,5 +1,5 @@
 import { stringify } from 'query-string';
-import HttpError from '../errors/HttpError';
+import HttpError from '../errors/http-error';
 
 export interface Options extends RequestInit {
   user?: {
