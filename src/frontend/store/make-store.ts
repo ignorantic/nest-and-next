@@ -1,43 +1,33 @@
-import { Store } from 'redux';
-import { configureStore } from '@reduxjs/toolkit';
+import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
 // import logger from 'redux-logger';
-import reducer from './root-reducer';
+import { Context, MakeStore } from 'next-redux-wrapper';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import makeRootSaga from './make-root-saga';
 import dataProvider from '../data-provider';
+import rootReducer from './root-reducer';
 
 interface Resource {
-  props: {[key: string]: object | string | boolean};
-  data: {[key: number]: object};
-  list: {[key: string]: object | number[] | number | boolean};
+  props: {[key: string]: Record<string, unknown> | string | boolean};
+  data: {[key: number]: Record<string, unknown>};
+  list: {[key: string]: Record<string, unknown> | number[] | number | boolean};
 }
 
-export interface ApplicationState {
-  readonly auth: object;
+export interface AppState {
   readonly resources: {[key: string]: Resource};
-  readonly game: object;
 }
 
-function makeStore(preloadedState: ApplicationState): Store {
+const makeStore: MakeStore<AppState> = (context: Context) => {
   const saga = createSagaMiddleware();
-  const middleware = [
-    saga,
-    thunk,
-    // logger,
-  ];
-  const store = configureStore({
-    reducer,
-    middleware,
-    devTools: process.env.NODE_ENV !== 'production',
-    preloadedState,
-    enhancers: [],
-  });
+  const store = createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware(saga, thunk)),
+  );
 
   const rootSaga = makeRootSaga(dataProvider);
-
   saga.run(rootSaga);
   return store;
-}
+};
 
 export default makeStore;

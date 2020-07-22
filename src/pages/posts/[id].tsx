@@ -13,6 +13,7 @@ import {
   crudGetOne,
   registerResource,
 } from '../../frontend/lib/redux-resourcify/actions';
+import { AppState } from '../../frontend/store/make-store';
 
 const useStyles = makeStyles((theme) => ({
   post: {
@@ -84,7 +85,7 @@ SinglePost.propTypes = propTypes;
 
 SinglePost.defaultProps = defaultProps;
 
-const selectResource = (state, name) => values(state?.resources[name]?.data);
+const selectResource = (state: AppState, name: string) => values(state?.resources[name]?.data);
 
 const mapStateToProps = (state) => ({
   posts: selectResource(state, 'posts').map((post) => new PostEntity(post)),
