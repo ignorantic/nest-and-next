@@ -57,7 +57,7 @@ const PostList: NextPage<PostListProps> = (props) => {
   return (
     <Container>
       <List>
-        {posts.map((post: CommonPost) => (
+        {posts?.map((post: CommonPost) => (
           <ListItem key={post.id} className={classes.post}>
             <div>
               <Typography component="h6" variant="h6">
@@ -80,7 +80,7 @@ const mapStateToProps = (state: AppState, { posts }: InitialPostListProps) => {
   const postsFromStore = selectResource(state, 'posts') as CommonPost[];
   const postEntities = postsFromStore.length ? postsFromStore : posts;
   return ({
-    posts: postEntities.map((post) => new PostEntity(post)),
+    posts: postEntities?.map((post) => new PostEntity(post)),
   });
 };
 

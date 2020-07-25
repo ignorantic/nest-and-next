@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { NextPage } from 'next';
 import {
   Container, Link, makeStyles, Typography,
@@ -30,7 +30,7 @@ interface InitialSinglePostProps {
 
 interface SinglePostProps {
   id: number;
-  post: CommonPost;
+  post?: CommonPost;
 }
 
 const PostSingle: NextPage<SinglePostProps> = (props) => {
@@ -47,19 +47,23 @@ const PostSingle: NextPage<SinglePostProps> = (props) => {
     dispatch(
       crudGetOne('posts', String(id), 'posts'),
     );
-  }, []);
+  }, [id]);
 
   const classes = useStyles();
 
   return (
     <Container>
       <div className={classes.post}>
-        <Typography component="h6" variant="h6">
-          <NextLink href="/posts/[id]" as={`/posts/${post.id}`} passHref>
-            <Link>{post.title}</Link>
-          </NextLink>
-        </Typography>
-        <Typography>{post.text}</Typography>
+        {post && (
+          <Fragment>
+            <Typography component="h6" variant="h6">
+              <NextLink href="/posts/[id]" as={`/posts/${post.id}`} passHref>
+                <Link>{post.title}</Link>
+              </NextLink>
+            </Typography>
+            <Typography>{post.text}</Typography>
+          </Fragment>
+        )}
       </div>
     </Container>
   );
@@ -75,7 +79,7 @@ const mapStateToProps = (state: AppState, { id, post }: InitialSinglePostProps) 
   const postFromStore = selectResource(state, 'posts', id) as CommonPost;
   const postEntity = postFromStore || post;
   return ({
-    post: new PostEntity(postEntity),
+    post: postEntity && new PostEntity(postEntity),
   });
 };
 

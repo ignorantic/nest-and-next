@@ -14,15 +14,15 @@ const SinglePostPage: NextPage<SinglePostPageProps> = ({ id, post }) => createEl
 );
 
 SinglePostPage.getInitialProps = ({ query }: NextPageContext) => {
-  const id = isNumber(query.id) ? query.id : null;
+  const id = isID(query.id) ? Number(query.id) : null;
   const post = isCommonPost(query.payload) ? query.payload : null;
   return ({ id, post });
 };
 
 export default SinglePostPage;
 
-function isNumber(id: unknown): id is number {
-  return typeof id === 'number';
+function isID(id: unknown): id is number {
+  return typeof Number(id) === 'number';
 }
 
 function isCommonPost(post: unknown): post is CommonPost {

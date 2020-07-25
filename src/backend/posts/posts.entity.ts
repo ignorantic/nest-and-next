@@ -9,7 +9,7 @@ export class Post implements CommonPost {
   @Column()
   title: string;
 
-  @Column()
+  @Column('text')
   text: string;
 
   @Column({ default: true })
