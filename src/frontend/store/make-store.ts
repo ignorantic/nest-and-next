@@ -7,10 +7,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import makeRootSaga from './make-root-saga';
 import dataProvider from '../data-provider';
 import rootReducer from './root-reducer';
+import { CommonPost } from '../../common/interfaces';
 
 interface Resource {
   props: {[key: string]: Record<string, unknown> | string | boolean};
-  data: {[key: number]: Record<string, unknown>};
+  data: {[key: number]: Record<string, unknown> | CommonPost};
   list: {[key: string]: Record<string, unknown> | number[] | number | boolean};
 }
 

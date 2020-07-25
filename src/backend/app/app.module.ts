@@ -3,10 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import Next from 'next';
 import { RenderModule } from 'nest-next';
-import { AppController } from './app.controller';
+
 import { User } from '../users/users.entity';
 import { Post } from '../posts/posts.entity';
-import { AdminModule } from '../admin/admin.module';
+import { HttpModule } from '../http/http.module';
 import { UsersModule } from '../users/users.module';
 import { PostsModule } from '../posts/posts.module';
 
@@ -35,9 +35,8 @@ import { PostsModule } from '../posts/posts.module';
     }),
     UsersModule,
     PostsModule,
-    AdminModule,
+    HttpModule,
   ],
-  controllers: [AppController],
 })
 
 export class AppModule {}

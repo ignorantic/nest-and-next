@@ -1,22 +1,23 @@
 import React from 'react';
 import { NextPage, NextPageContext } from 'next';
-import Link from 'next/link';
+import NextLink from 'next/link';
 
-interface Props {
+interface HomePageProps {
   userAgent?: string;
 }
 
-const Home: NextPage<Props> = () => (
+const HomePage: NextPage<HomePageProps> = ({ userAgent }) => (
   <div>
-    <Link href="/posts"><a>Posts</a></Link>
+    <NextLink href="/posts" passHref><a>Posts</a></NextLink>
+    {userAgent}
   </div>
 );
 
-Home.getInitialProps = (
+HomePage.getInitialProps = (
   { req }: NextPageContext,
-): Props => {
+): HomePageProps => {
   const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
   return { userAgent };
 };
 
-export default Home;
+export default HomePage;

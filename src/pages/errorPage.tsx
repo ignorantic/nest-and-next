@@ -1,17 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NextPage } from 'next';
+
+interface ErrorPageProps {
+  statusCode: number;
+}
 
 const propTypes = {
   statusCode: PropTypes.number.isRequired,
 };
 
-const _Error = props => {
+const ErrorPage: NextPage<ErrorPageProps> = (props) => {
   const { statusCode } = props;
 
-  return <span>Error: {statusCode}</span>;
+  return (
+    <span>
+      Error:
+      {statusCode}
+    </span>
+  );
 };
 
-_Error.getInitialProps = ({ res, query }) => {
+ErrorPage.getInitialProps = ({ res, query }) => {
   // make your validations
   const statusCode = !query.eventId ? 404 : 200;
 
@@ -23,6 +33,6 @@ _Error.getInitialProps = ({ res, query }) => {
   return { statusCode };
 };
 
-_Error.propTypes = propTypes;
+ErrorPage.propTypes = propTypes;
 
-export default _Error;
+export default ErrorPage;
