@@ -2,6 +2,7 @@ import { createElement } from 'react';
 import { NextPage, NextPageContext } from 'next';
 import PostSingle from '../../frontend/containers/post-single';
 import { CommonPost } from '../../common/interfaces';
+import { isCommonPost, isID } from '../../common/guards';
 
 interface SinglePostPageProps {
   id: number;
@@ -20,14 +21,3 @@ SinglePostPage.getInitialProps = ({ query }: NextPageContext) => {
 };
 
 export default SinglePostPage;
-
-function isID(id: unknown): id is number {
-  return typeof Number(id) === 'number';
-}
-
-function isCommonPost(post: unknown): post is CommonPost {
-  if (typeof post === 'object') {
-    return typeof (post as CommonPost).id === 'number';
-  }
-  return false;
-}

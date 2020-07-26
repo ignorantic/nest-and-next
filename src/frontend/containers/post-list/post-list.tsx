@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import {
   Container, Link, List, ListItem, makeStyles, Typography,
 } from '@material-ui/core';
+import { Pagination } from '@material-ui/lab';
 import NextLink from 'next/link';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
@@ -22,18 +23,26 @@ const useStyles = makeStyles((theme) => ({
     borderColor: theme.palette.grey[500],
     listStyleType: 'none',
   },
+  pagination: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: theme.spacing(2),
+  },
 }));
 
 interface InitialPostListProps {
   posts?: CommonPost[];
+  page: number;
 }
 
 interface PostListProps {
   posts: CommonPost[];
+  page: number;
 }
 
 const PostList: NextPage<PostListProps> = (props) => {
-  const { posts } = props;
+  const { posts, page } = props;
+  const [currentPage, setCurrentPage] = useState(page || 1);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,16 +52,23 @@ const PostList: NextPage<PostListProps> = (props) => {
         options: {},
       }),
     );
+  }, []);
+
+  useEffect(() => {
     dispatch(
       crudGetList(
         'posts',
-        { page: 1, perPage: 10 },
+        { page: currentPage, perPage: 10 },
         { field: 'id', order: 'ASC' },
       ),
     );
-  }, []);
+  }, [currentPage]);
 
   const classes = useStyles();
+
+  const handlePageChange = useCallback((event, pageNumber) => {
+    setCurrentPage(pageNumber);
+  }, []);
 
   return (
     <Container>
@@ -61,6 +77,9 @@ const PostList: NextPage<PostListProps> = (props) => {
           <ListItem key={post.id} className={classes.post}>
             <div>
               <Typography component="h6" variant="h6">
+                #
+                {post.id}
+                {': '}
                 <NextLink href="/posts/[id]" as={`/posts/${post.id}`} passHref>
                   <Link>{post.title}</Link>
                 </NextLink>
@@ -70,17 +89,28 @@ const PostList: NextPage<PostListProps> = (props) => {
           </ListItem>
         ))}
       </List>
+      <div className={classes.pagination}>
+        <Pagination
+          count={10}
+          color="primary"
+          variant="outlined"
+          shape="rounded"
+          page={currentPage}
+          onChange={handlePageChange}
+        />
+      </div>
     </Container>
   );
 };
 
 const selectResource = (state: AppState, name: string) => values(state?.resources[name]?.data);
 
-const mapStateToProps = (state: AppState, { posts }: InitialPostListProps) => {
+const mapStateToProps = (state: AppState, { posts, page }: InitialPostListProps) => {
   const postsFromStore = selectResource(state, 'posts') as CommonPost[];
   const postEntities = postsFromStore.length ? postsFromStore : posts;
   return ({
     posts: postEntities?.map((post) => new PostEntity(post)),
+    page,
   });
 };
 

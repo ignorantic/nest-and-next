@@ -13,6 +13,10 @@ import { PostEntity } from '../../entities';
 import { AppState } from '../../store/make-store';
 
 const useStyles = makeStyles((theme) => ({
+  breadcrumbs: {
+    padding: theme.spacing(1),
+    margin: theme.spacing(1),
+  },
   post: {
     padding: theme.spacing(1),
     margin: theme.spacing(1),
@@ -53,7 +57,12 @@ const PostSingle: NextPage<SinglePostProps> = (props) => {
 
   return (
     <Container>
-      <div className={classes.post}>
+      <section className={classes.breadcrumbs}>
+        <NextLink href="/posts/" as="/posts/" passHref>
+          <Link>Posts</Link>
+        </NextLink>
+      </section>
+      <section className={classes.post}>
         {post && (
           <Fragment>
             <Typography component="h6" variant="h6">
@@ -64,7 +73,7 @@ const PostSingle: NextPage<SinglePostProps> = (props) => {
             <Typography>{post.text}</Typography>
           </Fragment>
         )}
-      </div>
+      </section>
     </Container>
   );
 };

@@ -1,10 +1,14 @@
 import React, { FC } from 'react';
-import { Container, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Container, Typography, makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
+    backgroundColor: theme.palette.secondary.light,
+  },
+  inner: {
     textAlign: 'center',
+    color: theme.palette.common.white,
+    padding: theme.spacing(2),
   },
 }));
 
@@ -15,9 +19,13 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = () => {
   const classes = useStyles();
   return (
-    <Container component="header" classes={classes} fixed>
-      <Typography variant="body1">Header</Typography>
-    </Container>
+    <header className={classes.root}>
+      <Container component="section" fixed>
+        <div className={classes.inner}>
+          <Typography variant="h4">Header</Typography>
+        </div>
+      </Container>
+    </header>
   );
 };
 

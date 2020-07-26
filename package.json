@@ -18,6 +18,7 @@
   "dependencies": {
     "@fusionworks/ra-data-nest-crud": "^1.0.8",
     "@material-ui/core": "4.11.0",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/styles": "^4.10.0",
     "@nestjs/common": "^6.5.3",
     "@nestjs/config": "^0.5.0",

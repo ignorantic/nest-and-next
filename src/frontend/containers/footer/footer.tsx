@@ -1,11 +1,14 @@
 import React, { FC } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { Container, Typography, makeStyles } from '@material-ui/core';
 
-import { Container, Typography } from '@material-ui/core';
-
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
+    backgroundColor: theme.palette.secondary.light,
+  },
+  inner: {
     textAlign: 'center',
+    padding: theme.spacing(2),
+    color: theme.palette.common.white,
   },
 }));
 
@@ -18,12 +21,16 @@ const Footer: FC<FooterProps> = () => {
   const year = (new Date()).getFullYear();
 
   return (
-    <Container component="footer" classes={classes}>
-      <Typography variant="body1">
-        {'Nest&Next © '}
-        {year}
-      </Typography>
-    </Container>
+    <footer className={classes.root}>
+      <Container component="section">
+        <div className={classes.inner}>
+          <Typography variant="h6">
+            {'Nest&Next © '}
+            {year}
+          </Typography>
+        </div>
+      </Container>
+    </footer>
   );
 };
 
