@@ -3198,7 +3198,7 @@ connected-react-router@^6.5.2:
   dependencies:
     prop-types "^15.7.2"
 
-consola@^2.3.0:
+consola@^2.14.0, consola@^2.3.0:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/consola/-/consola-2.14.0.tgz#162ee903b6c9c4de25077d93f34ab902ebcb4dac"
   integrity sha512-A2j1x4u8d6SIVikhZROfpFJxQZie+cZOfQMyI/tu2+hWXe8iAv7R6FW6s6x04/7zBCst94lPddztot/d6GJiuQ==

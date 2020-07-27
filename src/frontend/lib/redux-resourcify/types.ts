@@ -1,77 +1,77 @@
 export type Identifier = string | number;
 export interface Record {
-    id: Identifier;
-    [key: string]: any;
+  id: Identifier;
+  [key: string]: any;
 }
 export interface ReduxState {
-    admin: {
-        resources: {
-            [name: string]: {
-                data: any;
-                list: {
-                    params: any;
-                    ids: Identifier[];
-                    loadedOnce: boolean;
-                    selectedIds: Identifier[];
-                    total: number;
-                };
-            };
+  admin: {
+    resources: {
+      [name: string]: {
+        data: any;
+        list: {
+          params: any;
+          ids: Identifier[];
+          loadedOnce: boolean;
+          selectedIds: Identifier[];
+          total: number;
         };
-        references: {
-            oneToMany: {
-                [relatedTo: string]: { ids: Identifier[]; total: number };
-            };
-        };
-        loading: number;
-        customQueries: {
-            [key: string]: any;
-        };
+      };
     };
+    references: {
+      oneToMany: {
+        [relatedTo: string]: { ids: Identifier[]; total: number };
+      };
+    };
+    loading: number;
+    customQueries: {
+      [key: string]: any;
+    };
+  };
 }
 export interface Sort {
-    field: string;
-    order: string;
+  field: string;
+  order: string;
 }
 export interface Pagination {
-    page: number;
-    perPage: number;
+  page: number;
+  perPage: number;
 }
 
 export type DataProvider = {
-    getList: (
-      resource: string,
-      params: GetListParams
-    ) => Promise<GetListResult>;
+  getList: (
+    resource: string,
+    params: GetListParams
+  ) => Promise<GetListResult>;
 
-    getOne: (resource: string, params: GetOneParams) => Promise<GetOneResult>;
+  getOne: (resource: string, params: GetOneParams) => Promise<GetOneResult>;
 
-    getMany: (
-      resource: string,
-      params: GetManyParams
-    ) => Promise<GetManyResult>;
+  getMany: (
+    resource: string,
+    params: GetManyParams
+  ) => Promise<GetManyResult>;
 
-    getManyReference: (
-      resource: string,
-      params: GetManyReferenceParams
-    ) => Promise<GetManyReferenceResult>;
+  getManyReference: (
+    resource: string,
+    params: GetManyReferenceParams
+  ) => Promise<GetManyReferenceResult>;
 
-    update: (resource: string, params: UpdateParams) => Promise<UpdateResult>;
+  update: (resource: string, params: UpdateParams) => Promise<UpdateResult>;
 
-    updateMany: (
-      resource: string,
-      params: UpdateManyParams
-    ) => Promise<UpdateManyResult>;
+  updateMany: (
+    resource: string,
+    params: UpdateManyParams
+  ) => Promise<UpdateManyResult>;
 
-    create: (resource: string, params: CreateParams) => Promise<CreateResult>;
+  create: (resource: string, params: CreateParams) => Promise<CreateResult>;
 
-    delete: (resource: string, params: DeleteParams) => Promise<DeleteResult>;
+  delete: (resource: string, params: DeleteParams) => Promise<DeleteResult>;
 
-    deleteMany: (
-      resource: string,
-      params: DeleteManyParams
-    ) => Promise<DeleteManyResult>;
+  deleteMany: (
+    resource: string,
+    params: DeleteManyParams
+  ) => Promise<DeleteManyResult>;
 
-    [key: string]: any;
+  [key: string]: any;
 };
 
 export type LegacyDataProvider = (
@@ -81,76 +81,75 @@ export type LegacyDataProvider = (
 ) => Promise<any>;
 
 export interface GetListParams {
-    pagination: Pagination;
-    sort: Sort;
-    filter: any;
+  pagination: Pagination;
+  sort: Sort;
+  filter: any;
 }
 export interface GetListResult {
-    data: Record[];
-    total: number;
+  data: Record[];
+  total: number;
 }
 
 export interface GetOneParams {
-    id: Identifier;
+  id: Identifier;
 }
 export interface GetOneResult {
-    data: Record;
+  data: Record;
 }
 
 export interface GetManyParams {
-    ids: Identifier[];
+  ds: Identifier[];
 }
 export interface GetManyResult {
-    data: Record[];
+  data: Record[];
 }
 
 export interface GetManyReferenceParams {
-    target: string;
-    id: Identifier;
-    pagination: Pagination;
-    sort: Sort;
-    filter: any;
+  target: string;
+  id: Identifier;
+  pagination: Pagination;
+  sort: Sort;
+  filter: any;
 }
 export interface GetManyReferenceResult {
-    data: Record[];
-    total: number;
+  data: Record[];
+  total: number;
 }
 
 export interface UpdateParams {
-    id: Identifier;
-    data: any;
-    previousData: Record;
+  id: Identifier;
+  data: any;
+  previousData: Record;
 }
 export interface UpdateResult {
-    data: Record;
+  data: Record;
 }
 
 export interface UpdateManyParams {
-    ids: Identifier[];
-    data: any;
+  ids: Identifier[];
+  data: any;
 }
 export interface UpdateManyResult {
-    data?: Identifier[];
+  data?: Identifier[];
 }
 
 export interface CreateParams {
-    data: any;
+  data: any;
 }
 export interface CreateResult {
-    data: Record;
+  data: Record;
 }
 
 export interface DeleteParams {
-    id: Identifier;
+  id: Identifier;
 }
 export interface DeleteResult {
-    data?: Record;
+  data?: Record;
 }
 
 export interface DeleteManyParams {
-    ids: Identifier[];
+  ids: Identifier[];
 }
 export interface DeleteManyResult {
-    data?: Identifier[];
+  data?: Identifier[];
 }
-

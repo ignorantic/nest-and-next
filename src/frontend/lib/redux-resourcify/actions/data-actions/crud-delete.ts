@@ -14,7 +14,7 @@ export const crudDelete = (
     resource,
     fetch: DELETE,
     onSuccess: {
-      //
+    //
       basePath,
     },
     onFailure: {
@@ -27,60 +27,60 @@ export const crudDelete = (
 });
 
 interface RequestPayload {
-    id: Identifier;
-    previousData: Record;
+  id: Identifier;
+  previousData: Record;
 }
 
 export const CRUD_DELETE = 'RA/CRUD_DELETE';
 export interface CrudDeleteAction {
-    readonly type: typeof CRUD_DELETE;
-    readonly payload: RequestPayload;
-    readonly meta: {
-        resource: string;
-        fetch: typeof DELETE;
-        onSuccess: {
-            //
-            basePath: string;
-        };
-        onFailure: {
-            //
-        };
+  readonly type: typeof CRUD_DELETE;
+  readonly payload: RequestPayload;
+  readonly meta: {
+    resource: string;
+    fetch: typeof DELETE;
+    onSuccess: {
+      //
+      basePath: string;
     };
+    onFailure: {
+      //
+    };
+  };
 }
 
 export const CRUD_DELETE_LOADING = 'RA/CRUD_DELETE_LOADING';
 export interface CrudDeleteLoadingAction {
-    readonly type: typeof CRUD_DELETE_LOADING;
-    readonly payload: RequestPayload;
-    readonly meta: {
-        resource: string;
-    };
+  readonly type: typeof CRUD_DELETE_LOADING;
+  readonly payload: RequestPayload;
+  readonly meta: {
+    resource: string;
+  };
 }
 
 export const CRUD_DELETE_FAILURE = 'RA/CRUD_DELETE_FAILURE';
 export interface CrudDeleteFailureAction {
-    readonly type: typeof CRUD_DELETE_FAILURE;
-    readonly error: string | object;
-    readonly payload: string;
-    readonly requestPayload: RequestPayload;
-    readonly meta: {
-        resource: string;
-        fetchResponse: typeof CRUD_DELETE;
-        fetchStatus: typeof FETCH_ERROR;
-    };
+  readonly type: typeof CRUD_DELETE_FAILURE;
+  readonly error: string | object;
+  readonly payload: string;
+  readonly requestPayload: RequestPayload;
+  readonly meta: {
+    resource: string;
+    fetchResponse: typeof CRUD_DELETE;
+    fetchStatus: typeof FETCH_ERROR;
+  };
 }
 
 export const CRUD_DELETE_SUCCESS = 'RA/CRUD_DELETE_SUCCESS';
 export interface CrudDeleteSuccessAction {
-    readonly type: typeof CRUD_DELETE_SUCCESS;
-    readonly payload: {
-        data: Record;
-    };
-    readonly requestPayload: RequestPayload;
-    readonly meta: {
-        resource: string;
-        basePath: string;
-        fetchResponse: typeof CRUD_DELETE;
-        fetchStatus: typeof FETCH_END;
-    };
+  readonly type: typeof CRUD_DELETE_SUCCESS;
+  readonly payload: {
+    data: Record;
+  };
+  readonly requestPayload: RequestPayload;
+  readonly meta: {
+    resource: string;
+    basePath: string;
+    fetchResponse: typeof CRUD_DELETE;
+    fetchStatus: typeof FETCH_END;
+  };
 }

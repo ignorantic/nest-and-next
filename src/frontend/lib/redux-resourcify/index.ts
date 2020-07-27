@@ -3,3 +3,4 @@ export * from './types';
 export * from './actions';
 export * from './side-effect';
 export * from './util';
+export * from './hooks';

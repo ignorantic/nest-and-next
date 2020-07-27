@@ -4,14 +4,14 @@ import { Pagination, Sort, Identifier } from '../types';
 export const CRUD_GET_MANY_ACCUMULATE = 'RA/CRUD_GET_MANY_ACCUMULATE';
 
 export interface CrudGetManyAccumulateAction {
-    readonly type: typeof CRUD_GET_MANY_ACCUMULATE;
-    readonly payload: {
-        resource: string;
-        ids: Identifier[];
-    };
-    readonly meta: {
-        accumulate: any;
-    };
+  readonly type: typeof CRUD_GET_MANY_ACCUMULATE;
+  readonly payload: {
+    resource: string;
+    ids: Identifier[];
+  };
+  readonly meta: {
+    accumulate: any;
+  };
 }
 
 export const crudGetManyAccumulate = (
@@ -26,12 +26,12 @@ export const crudGetManyAccumulate = (
 export const CRUD_GET_MATCHING_ACCUMULATE = 'RA/CRUD_GET_MATCHING_ACCUMULATE';
 
 export interface CrudGetMatchingAccumulateAction {
-    readonly type: typeof CRUD_GET_MATCHING_ACCUMULATE;
-    readonly meta: {
-        accumulate: () => any;
-        accumulateValues?: () => boolean;
-        accumulateKey?: string;
-    };
+  readonly type: typeof CRUD_GET_MATCHING_ACCUMULATE;
+  readonly meta: {
+    accumulate: () => any;
+    accumulateValues?: () => boolean;
+    accumulateKey?: string;
+  };
 }
 
 export const crudGetMatchingAccumulate = (

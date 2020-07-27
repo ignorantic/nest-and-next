@@ -34,7 +34,6 @@ export default (previousState = initialState, action: ActionTypes) => {
         return acc;
       }
 
-      // @ts-ignore
       return { ...acc, [key]: previousState[key] };
     }, {});
   }
@@ -44,25 +43,19 @@ export default (previousState = initialState, action: ActionTypes) => {
   }
 
   const resources = Object.keys(previousState);
-  // @ts-ignore
   const newState = resources.reduce(
     (acc, resource) => ({
       ...acc,
       [resource]:
-      // @ts-ignore
         action.meta.resource === resource
           ? {
-            // @ts-ignore
             props: previousState[resource].props,
-            // @ts-ignore
             data: data(previousState[resource].data, action),
-            // @ts-ignore
             list: list(previousState[resource].list, action),
           }
-          // @ts-ignore
           : previousState[resource],
     }),
-    {}
+    {},
   );
 
   return newState;

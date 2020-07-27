@@ -37,6 +37,7 @@
     "@types/redux-saga": "^0.10.5",
     "@types/redux-thunk": "^2.1.0",
     "class-transformer": "^0.2.3",
+    "consola": "^2.14.0",
     "cross-env": "^6.0.3",
     "dotenv-load": "^2.0.0",
     "faker": "^4.1.0",

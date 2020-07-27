@@ -32,12 +32,12 @@ export interface CrudGetOneAction {
   readonly type: typeof CRUD_GET_ONE;
   readonly payload: RequestPayload;
   readonly meta: {
-    resource: string;
-    fetch: typeof GET_ONE;
-    basePath: string;
-    onFailure: {
-      //
-    };
+  resource: string;
+  fetch: typeof GET_ONE;
+  basePath: string;
+  onFailure: {
+    //
+  };
   };
 }
 
@@ -46,8 +46,8 @@ export interface CrudGetOneLoadingAction {
   readonly type: typeof CRUD_GET_ONE_LOADING;
   readonly payload: RequestPayload;
   readonly meta: {
-    resource: string;
-    basePath: string;
+  resource: string;
+  basePath: string;
   };
 }
 
@@ -58,9 +58,9 @@ export interface CrudGetOneFailureAction {
   readonly payload: string;
   readonly requestPayload: RequestPayload;
   readonly meta: {
-    resource: string;
-    fetchResponse: typeof GET_ONE;
-    fetchStatus: typeof FETCH_ERROR;
+  resource: string;
+  fetchResponse: typeof GET_ONE;
+  fetchStatus: typeof FETCH_ERROR;
   };
 }
 
@@ -68,12 +68,12 @@ export const CRUD_GET_ONE_SUCCESS = 'RA/CRUD_GET_ONE_SUCCESS';
 export interface CrudGetOneSuccessAction {
   readonly type: typeof CRUD_GET_ONE_SUCCESS;
   readonly payload: {
-    data: Record;
+  data: Record;
   };
   readonly requestPayload: RequestPayload;
   readonly meta: {
-    resource: string;
-    fetchResponse: typeof GET_ONE;
-    fetchStatus: typeof FETCH_END;
+  resource: string;
+  fetchResponse: typeof GET_ONE;
+  fetchStatus: typeof FETCH_END;
   };
 }

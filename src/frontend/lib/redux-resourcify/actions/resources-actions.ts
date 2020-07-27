@@ -1,13 +1,13 @@
 export const REGISTER_RESOURCE = 'RA/REGISTER_RESOURCE';
 
 export interface ResourceDefinition {
-    readonly name: string;
-    readonly options?: any;
+  readonly name: string;
+  readonly options?: any;
 }
 
 export interface RegisterResourceAction {
-    readonly type: typeof REGISTER_RESOURCE;
-    readonly payload: ResourceDefinition;
+  readonly type: typeof REGISTER_RESOURCE;
+  readonly payload: ResourceDefinition;
 }
 
 export const registerResource = (
@@ -20,8 +20,8 @@ export const registerResource = (
 export const UNREGISTER_RESOURCE = 'RA/UNREGISTER_RESOURCE';
 
 export interface UnregisterResourceAction {
-    readonly type: typeof UNREGISTER_RESOURCE;
-    readonly payload: string;
+  readonly type: typeof UNREGISTER_RESOURCE;
+  readonly payload: string;
 }
 
 export const unregisterResource = (
