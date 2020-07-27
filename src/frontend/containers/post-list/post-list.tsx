@@ -11,8 +11,8 @@ import { Pagination } from '@material-ui/lab';
 import { NextPage } from 'next';
 import NextLink from 'next/link';
 
+import { useListController } from '../../lib/redux-resourcify';
 import { CommonPost } from '../../../common/interfaces';
-import { useListController } from '../../lib/redux-resourcify/hooks';
 
 const useStyles = makeStyles((theme) => ({
   post: {

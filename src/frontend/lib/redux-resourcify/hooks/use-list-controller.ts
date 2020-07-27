@@ -32,6 +32,7 @@ export const useListController = <Entity>(props: ListProps): ListControllerProps
   type EntityList = Record<number, Entity>
   const resourcePath = ['resources', resource];
 
+  const selectIsRegistered = (state: AppState): boolean => path(resourcePath, state);
   const selectList = (state: AppState): EntityList => path([...resourcePath, 'data'], state);
   const selectIds = (state: AppState): number[] => path([...resourcePath, 'list', 'ids'], state);
   const selectTotal = (state: AppState): number => path([...resourcePath, 'list', 'total'], state);
@@ -42,26 +43,19 @@ export const useListController = <Entity>(props: ListProps): ListControllerProps
 
   const dispatch = useDispatch();
 
+  const isRegistered = useSelector(selectIsRegistered);
+
   useEffect(() => {
-    dispatch(
-      registerResource({
-        name: resource,
-        options: {},
-      }),
-    );
+    if (!isRegistered) {
+      dispatch(registerResource({ name: resource, options: {} }));
+    }
   }, []);
 
   useEffect(() => {
     const asPath = page === 1 ? basePath : `${basePath}?page=${page}`;
     router.push(basePath, asPath, { shallow: true })
       .then(() => {
-        dispatch(
-          crudGetList(
-            resource,
-            { page, perPage },
-            { field: 'id', order: 'ASC' },
-          ),
-        );
+        dispatch(crudGetList(resource, { page, perPage }, { field: 'id', order: 'ASC' }));
       })
       .catch(() => {
         consola.error(`Redirect was failed. Path: ${asPath}`);

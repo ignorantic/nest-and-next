@@ -1,23 +1,21 @@
 import { createElement } from 'react';
 import { NextPage, NextPageContext } from 'next';
-import PostSingle from '../../frontend/containers/post-single';
-import { CommonPost } from '../../common/interfaces';
+import PostShow from '../../frontend/containers/post-show';
 import { isCommonPost, isID } from '../../common/guards';
 
-interface SinglePostPageProps {
+interface PostShowPageProps {
   id: number;
-  post: CommonPost;
 }
 
-const SinglePostPage: NextPage<SinglePostPageProps> = ({ id, post }) => createElement(
-  PostSingle,
-  { id, post },
+const PostShowPage: NextPage<PostShowPageProps> = ({ id }) => createElement(
+  PostShow,
+  { id },
 );
 
-SinglePostPage.getInitialProps = ({ query }: NextPageContext) => {
+PostShowPage.getInitialProps = ({ query }: NextPageContext) => {
   const id = isID(query.id) ? Number(query.id) : null;
   const post = isCommonPost(query.payload) ? query.payload : null;
-  return ({ id, post });
+  return ({ id });
 };
 
-export default SinglePostPage;
+export default PostShowPage;
