@@ -3,9 +3,9 @@ import { Reducer } from 'redux';
 import { CrudGetListSuccessAction, CrudGetMatchingSuccessAction, GET_LIST } from '../../../actions';
 
 type ActionTypes =
-    | CrudGetListSuccessAction
-    | CrudGetMatchingSuccessAction
-    | { type: 'OTHER_TYPE'; payload: any; meta: any };
+  | CrudGetListSuccessAction
+  | CrudGetMatchingSuccessAction
+  | { type: 'OTHER_TYPE'; payload: any; meta: any };
 
 type State = number;
 

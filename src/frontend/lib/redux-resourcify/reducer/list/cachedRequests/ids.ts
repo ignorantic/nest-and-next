@@ -11,9 +11,9 @@ type IdentifierArray = Identifier[];
 type State = IdentifierArray;
 
 type ActionTypes =
-    | CrudGetListSuccessAction
-    | CrudGetMatchingSuccessAction
-    | { type: 'OTHER_TYPE'; payload: any; meta: any };
+  | CrudGetListSuccessAction
+  | CrudGetMatchingSuccessAction
+  | { type: 'OTHER_TYPE'; payload: any; meta: any };
 
 const initialState = [];
 

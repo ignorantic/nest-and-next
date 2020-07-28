@@ -8,7 +8,7 @@ interface HomePageProps {
 
 const HomePage: NextPage<HomePageProps> = ({ userAgent }) => (
   <div>
-    <NextLink href="/posts" passHref><a>Posts</a></NextLink>
+    <NextLink href="/posts" passHref shallow><a>Posts</a></NextLink>
     {userAgent}
   </div>
 );

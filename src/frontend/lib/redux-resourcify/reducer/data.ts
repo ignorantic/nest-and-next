@@ -68,7 +68,6 @@ export const addRecordsAndRemoveOutdated = (
   oldRecords: RecordSetWithDate,
 ): RecordSetWithDate => {
   const newRecordsById = {};
-  // @ts-ignore
   newRecords.forEach((record) => (newRecordsById[record.id] = record));
 
   const newFetchedAt = getFetchedAt(
@@ -78,15 +77,11 @@ export const addRecordsAndRemoveOutdated = (
 
   const records = { fetchedAt: newFetchedAt };
   Object.keys(newFetchedAt).forEach(
-    (id) =>
-      // @ts-ignore
-      (records[id] = newRecordsById[id]
-        // @ts-ignore
-        ? isEqual(newRecordsById[id], oldRecords[id])
-          ? oldRecords[id] // do not change the record to avoid a redraw
-          // @ts-ignore
-          : newRecordsById[id]
-        : oldRecords[id]),
+    (id) => (records[id] = newRecordsById[id]
+      ? isEqual(newRecordsById[id], oldRecords[id])
+        ? oldRecords[id] // do not change the record to avoid a redraw
+        : newRecordsById[id]
+      : oldRecords[id]),
   );
 
   return hideFetchedAt(records);
@@ -171,7 +166,6 @@ const dataReducer: Reducer<RecordSetWithDate> = (
       return addOneRecord(updatedRecord, previousState);
     }
     if (meta.fetch === UPDATE_MANY) {
-      // @ts-ignore
       const updatedRecords = payload.ids.map((id) => ({
         ...previousState[id],
         ...payload.data,
@@ -204,7 +198,6 @@ const dataReducer: Reducer<RecordSetWithDate> = (
   }
 };
 
-// @ts-ignore
 export const getRecord = (state, id) => state[id];
 
 export default dataReducer;

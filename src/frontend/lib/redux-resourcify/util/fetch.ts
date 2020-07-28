@@ -69,7 +69,6 @@ function isValidObject<T>(value: T): boolean {
   }
 
   const isArray = Array.isArray(value);
-  // @ts-ignore
   const isBuffer = typeof Buffer !== 'undefined' && Buffer.isBuffer(value);
   const isObject = Object.prototype.toString.call(value) === '[object Object]';
   const hasKeys = !!Object.keys(value).length;
@@ -82,7 +81,6 @@ export function flattenObject<T, P>(value: T, path: Array<string> = []): T | {} 
     return Object.assign(
       {},
       ...Object.keys(value).map((key: string) => (
-        // @ts-ignore
         flattenObject(value[key], path.concat([key]))
       )),
     );

@@ -8,7 +8,7 @@ import {
 import data from './data';
 import list from './list';
 
-const initialState = {};
+const initialState = { needHydrate: true };
 
 type ActionTypes =
   | RegisterResourceAction

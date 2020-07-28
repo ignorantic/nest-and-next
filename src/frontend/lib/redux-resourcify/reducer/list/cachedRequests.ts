@@ -15,7 +15,7 @@ interface CachedRequestState {
 }
 
 interface State {
-    [key: string]: CachedRequestState;
+  [key: string]: CachedRequestState;
 }
 
 const initialState = {};

@@ -46,7 +46,7 @@ const PostShow: NextPage<PostShowProps> = (props) => {
   return (
     <Container>
       <section className={classes.breadcrumbs}>
-        <NextLink href="/posts/" as="/posts/" passHref>
+        <NextLink href="/posts" as="/posts" passHref>
           <Link>Posts</Link>
         </NextLink>
       </section>

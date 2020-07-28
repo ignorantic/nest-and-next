@@ -1,8 +1,11 @@
 import React, { ComponentType } from 'react';
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
+import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
 import { is } from 'ramda';
 
-import FrontendRoot from '../frontend/frontend-root';
+import { wrapper } from '../frontend/store';
+import theme from '../frontend/theme';
+import Layout from '../frontend/layout';
 
 interface AppProps extends AppInitialProps {
   Component: ComponentType;
@@ -22,36 +25,28 @@ class App extends NextApp<AppProps> {
   }
 
   render(): JSX.Element {
-    const {
-      router,
-      Component,
-    } = this.props;
+    const { Component } = this.props;
 
     const pageProps = getValidPageProps(this.props.pageProps);
 
-    if (isAdmin(router.route)) {
-      return <Component {...pageProps} />;
-    }
-
     return (
-      <FrontendRoot initialState={{}} initialProps={{}}>
-        <Component {...pageProps} />
-      </FrontendRoot>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </MuiThemeProvider>
     );
   }
 }
 
-export default App;
+export default wrapper.withRedux(App);
 
 function removeJssStyles(): void {
   const jssStyles = document.querySelector('#jss-server-side');
   if (jssStyles && jssStyles.parentNode) {
     jssStyles.parentNode.removeChild(jssStyles);
   }
-}
-
-function isAdmin(route: string): boolean {
-  return route === '/admin';
 }
 
 function getValidPageProps(pageProps: unknown): Record<string, unknown> {
