@@ -1,7 +1,7 @@
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { path } from 'ramda';
+import { pipe, path } from 'ramda';
 import consolaGlobalInstance from 'consola';
 
 import { ReduxState } from '../types';
@@ -13,7 +13,6 @@ import {
   ListParams,
 } from '../actions';
 import { isPage } from '../../../../common/guards';
-import { AppState } from '../../../store/make-store';
 
 const defaultParams: ListParams = {
   page: 1,
@@ -81,10 +80,11 @@ const useListParams = ({
     requestSignature,
   );
 
-  const selectIsRegistered = (state: AppState): boolean => Boolean(path(['resources', resource], state));
-  const isRegistered = useSelector(selectIsRegistered);
+  const isRegistered = useSelector(pipe(path(['resources', resource]), Boolean));
   useEffect(() => {
-    const initialPage = isPage(router.query.page) ? Number(router.query.page) : 1;
+    const initialPage = isPage(router.query.page)
+      ? Number(router.query.page)
+      : query.page;
     setPage(initialPage);
     if (!isRegistered) {
       dispatch(registerResource({ name: resource, options: {} }));
