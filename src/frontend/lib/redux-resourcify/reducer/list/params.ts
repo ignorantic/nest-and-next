@@ -13,11 +13,11 @@ const defaultState = {
 };
 
 export interface ParamsState {
-  sort: string;
-  order: string;
+  sort?: string; // ? temporarily
+  order?: string; // ? temporarily
   page: number;
   perPage: number;
-  filter: any;
+  filter?: any; // ? temporarily
 }
 
 type ActionTypes =

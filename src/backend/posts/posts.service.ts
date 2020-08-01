@@ -16,7 +16,8 @@ export class PostsService extends TypeOrmCrudService<Post> {
     const skippedItems = (postPaginationDto.page - 1) * postPaginationDto.limit;
 
     const totalCount = await this.repo.count();
-    const posts = await this.repo.createQueryBuilder()
+    const posts = await this.repo.createQueryBuilder('post')
+      .leftJoinAndSelect('post.user', 'user')
       .offset(skippedItems)
       .limit(postPaginationDto.limit)
       .getMany();

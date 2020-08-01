@@ -6,7 +6,7 @@ import {
   List,
 } from 'react-admin';
 
-const PostList = props => (
+const PostList = (props) => (
   <List {...props}>
     <Datagrid rowClick="show">
       <TextField source="title" />

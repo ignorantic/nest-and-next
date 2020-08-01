@@ -4,7 +4,6 @@ import { NextPage, NextPageContext } from 'next';
 import PostList from '../../frontend/containers/post-list';
 import { isCommonPostList } from '../../common/guards';
 import { CRUD_GET_LIST_SUCCESS, registerResource } from '../../frontend/lib/redux-resourcify';
-import { CommonPost } from '../../common/interfaces';
 
 const PostListPage: NextPage = () => createElement(PostList);
 

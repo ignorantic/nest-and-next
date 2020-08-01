@@ -1,11 +1,11 @@
 import { Post } from '../posts.entity';
 
 export class PostsPaginatedResultDto {
-  data: Post[]
+  data: Post[];
 
-  page: number
+  page: number;
 
-  limit: number
+  limit: number;
 
-  totalCount: number
+  totalCount: number;
 }

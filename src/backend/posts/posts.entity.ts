@@ -1,5 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn,
+} from 'typeorm';
 import { CommonPost } from '../../common/interfaces';
+import { User } from '../users/users.entity';
 
 @Entity()
 export class Post implements CommonPost {
@@ -11,6 +14,10 @@ export class Post implements CommonPost {
 
   @Column('text')
   text: string;
+
+  @ManyToOne((type) => User)
+  @JoinColumn()
+  user: User;
 
   @Column({ default: true })
   isActive: boolean;

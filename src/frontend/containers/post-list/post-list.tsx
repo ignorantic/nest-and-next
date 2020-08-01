@@ -61,6 +61,7 @@ const PostList: NextPage = () => {
                 <NextLink href="/posts/[id]" as={`/posts/${post.id}`} passHref>
                   <Link>{post.title}</Link>
                 </NextLink>
+                {` ${post.user?.firstName} ${post.user?.lastName}`}
               </Typography>
               <Typography>{post.text}</Typography>
             </div>

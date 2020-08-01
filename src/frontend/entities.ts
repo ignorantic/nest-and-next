@@ -5,6 +5,7 @@ export class PostEntity {
     this.id = Number(post.id);
     this.title = String(post.title);
     this.text = String(post.text);
+    this.user = post.user;
     this.isActive = Boolean(post.isActive);
   }
 
@@ -13,6 +14,8 @@ export class PostEntity {
   title: string;
 
   text: string;
+
+  user: object;
 
   isActive: boolean;
 }
