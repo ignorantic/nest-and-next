@@ -4,19 +4,21 @@ import { NextPage, NextPageContext } from 'next';
 import PostList from '../../frontend/containers/post-list';
 import { isCommonPostList } from '../../common/guards';
 import { CRUD_GET_LIST_SUCCESS, registerResource } from '../../frontend/lib/redux-resourcify';
+import { CommonPost } from '../../common/interfaces';
 
 const PostListPage: NextPage = () => createElement(PostList);
 
 PostListPage.getInitialProps = ({ query, store, res }: NextPageContext) => {
   const isServer = Boolean(res);
   if (isServer) {
-    const posts = isCommonPostList(query.payload) ? query.payload : null;
+    const { data, totalCount } = query;
+    const hasData = isCommonPostList(data);
     store.dispatch(registerResource({ name: 'posts' }));
     store.dispatch({
       type: CRUD_GET_LIST_SUCCESS,
       payload: {
-        data: posts,
-        total: 95,
+        data: hasData ? data : [],
+        total: totalCount,
       },
       requestPayload: {
         pagination: {

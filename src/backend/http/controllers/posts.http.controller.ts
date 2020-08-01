@@ -14,14 +14,14 @@ export class PostsHttpController {
   @Get('posts')
   public async postList(
     @Query() query: PostsPaginationDto,
-  ): Promise<{ payload, page }> {
-    const { data } = await this.postService.findAll({
+  ): Promise<{ data, totalCount, page }> {
+    const { data, totalCount } = await this.postService.findAll({
       ...query,
       page: Number(query.page) || 1,
       limit: Number(query.limit) || 10,
     });
 
-    return { ...query, payload: data };
+    return { ...query, data, totalCount };
   }
 
   @Render('posts/[id]')
