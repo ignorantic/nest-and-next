@@ -11,6 +11,7 @@ import { Pagination } from '@material-ui/lab';
 import { NextPage } from 'next';
 import NextLink from 'next/link';
 
+import { useRouter } from 'next/router';
 import { useListController } from '../../lib/redux-resourcify';
 import { CommonPost } from '../../../common/interfaces';
 

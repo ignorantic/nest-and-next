@@ -1,37 +1,32 @@
+import { ListParams } from './actions';
+
 export type Identifier = string | number;
+
 export interface Record {
   id: Identifier;
   [key: string]: any;
 }
+
 export interface ReduxState {
-  admin: {
-    resources: {
-      [name: string]: {
-        data: any;
-        list: {
-          params: any;
-          ids: Identifier[];
-          loadedOnce: boolean;
-          selectedIds: Identifier[];
-          total: number;
-        };
+  resources: {
+    [name: string]: {
+      data: any;
+      list: {
+        params: ListParams;
+        ids: Identifier[];
+        loadedOnce: boolean;
+        selectedIds: Identifier[];
+        total: number;
       };
-    };
-    references: {
-      oneToMany: {
-        [relatedTo: string]: { ids: Identifier[]; total: number };
-      };
-    };
-    loading: number;
-    customQueries: {
-      [key: string]: any;
     };
   };
 }
+
 export interface Sort {
   field: string;
   order: string;
 }
+
 export interface Pagination {
   page: number;
   perPage: number;
@@ -85,6 +80,7 @@ export interface GetListParams {
   sort: Sort;
   filter: any;
 }
+
 export interface GetListResult {
   data: Record[];
   total: number;
@@ -93,6 +89,7 @@ export interface GetListResult {
 export interface GetOneParams {
   id: Identifier;
 }
+
 export interface GetOneResult {
   data: Record;
 }
@@ -121,6 +118,7 @@ export interface UpdateParams {
   data: any;
   previousData: Record;
 }
+
 export interface UpdateResult {
   data: Record;
 }
@@ -129,6 +127,7 @@ export interface UpdateManyParams {
   ids: Identifier[];
   data: any;
 }
+
 export interface UpdateManyResult {
   data?: Identifier[];
 }
@@ -136,6 +135,7 @@ export interface UpdateManyResult {
 export interface CreateParams {
   data: any;
 }
+
 export interface CreateResult {
   data: Record;
 }
@@ -143,6 +143,7 @@ export interface CreateResult {
 export interface DeleteParams {
   id: Identifier;
 }
+
 export interface DeleteResult {
   data?: Record;
 }
@@ -150,6 +151,7 @@ export interface DeleteResult {
 export interface DeleteManyParams {
   ids: Identifier[];
 }
+
 export interface DeleteManyResult {
   data?: Identifier[];
 }

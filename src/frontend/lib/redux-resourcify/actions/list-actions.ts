@@ -3,11 +3,8 @@ import { Identifier } from '../types';
 export const CRUD_CHANGE_LIST_PARAMS = 'RA/CRUD_CHANGE_LIST_PARAMS';
 
 export interface ListParams {
-  sort: string;
-  order: string;
   page: number;
   perPage: number;
-  filter: any;
 }
 
 export interface ChangeListParamsAction {
