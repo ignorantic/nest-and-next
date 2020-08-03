@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { NextPage } from 'next';
 import {
   Container,
-  Typography,
   Link,
   makeStyles,
 } from '@material-ui/core';
@@ -10,6 +9,7 @@ import NextLink from 'next/link';
 
 import { useShowController } from '../../lib/redux-resourcify';
 import { CommonUser } from '../../../common/interfaces';
+import User from '../../components/user';
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbs: {
@@ -33,7 +33,6 @@ interface PostShowProps {
 
 const UserShow: NextPage<PostShowProps> = (props) => {
   const { id, user } = props;
-  console.log('user', user);
 
   const {
     record = user,
@@ -52,19 +51,7 @@ const UserShow: NextPage<PostShowProps> = (props) => {
           <Link>Users</Link>
         </NextLink>
       </section>
-      <section className={classes.post}>
-        {record && (
-          <Fragment>
-            <Typography component="h6" variant="h6">
-              {`#${record.id}: `}
-              {record.firstName}
-              {' '}
-              {record.lastName}
-            </Typography>
-            <Typography variant="subtitle1">{record.email}</Typography>
-          </Fragment>
-        )}
-      </section>
+      <article>{record && <User user={record} />}</article>
     </Container>
   );
 };

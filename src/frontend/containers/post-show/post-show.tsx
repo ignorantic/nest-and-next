@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { NextPage } from 'next';
 import {
   Container,
-  Typography,
   Link,
   makeStyles,
 } from '@material-ui/core';
@@ -10,19 +9,12 @@ import NextLink from 'next/link';
 
 import { useShowController } from '../../lib/redux-resourcify';
 import { CommonPost } from '../../../common/interfaces';
+import Post from '../../components/post';
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbs: {
     padding: theme.spacing(1),
     margin: theme.spacing(1),
-  },
-  post: {
-    padding: theme.spacing(1),
-    margin: theme.spacing(1),
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: theme.palette.grey[500],
-    listStyleType: 'none',
   },
 }));
 
@@ -51,17 +43,7 @@ const PostShow: NextPage<PostShowProps> = (props) => {
           <Link>Posts</Link>
         </NextLink>
       </section>
-      <section className={classes.post}>
-        {record && (
-          <Fragment>
-            <Typography component="h6" variant="h6">
-              {`#${record.id}: `}
-              {record.title}
-            </Typography>
-            <Typography>{record.text}</Typography>
-          </Fragment>
-        )}
-      </section>
+      <article>{record && <Post post={record} />}</article>
     </Container>
   );
 };
