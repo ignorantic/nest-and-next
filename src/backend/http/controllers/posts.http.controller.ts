@@ -7,15 +7,13 @@ import { PostsPaginationDto } from '../../posts/dto/posts.pagination.dto';
 
 @Controller()
 export class PostsHttpController {
-  constructor(public postService: PostsService) {}
+  constructor(public postsService: PostsService) {}
 
   @UseInterceptors(CrudRequestInterceptor)
   @Render('posts')
   @Get('posts')
-  public async postList(
-    @Query() query: PostsPaginationDto,
-  ): Promise<{ data, totalCount, page }> {
-    const { data, totalCount } = await this.postService.findAll({
+  public async postList(@Query() query: PostsPaginationDto): Promise<{ data, totalCount, page }> {
+    const { data, totalCount } = await this.postsService.findAll({
       ...query,
       page: Number(query.page) || 1,
       limit: Number(query.limit) || 10,
@@ -26,8 +24,8 @@ export class PostsHttpController {
 
   @Render('posts/[id]')
   @Get('posts/:id')
-  public async post(@Param('id') id?: string) {
-    const payload = await this.postService.findOne(id);
-    return { id, payload };
+  public async post(@Param('id') id?: string): Promise<{ id, data }> {
+    const data = await this.postsService.findOne(id);
+    return { id, data };
   }
 }

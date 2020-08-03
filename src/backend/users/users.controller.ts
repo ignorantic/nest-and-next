@@ -8,6 +8,13 @@ import { UsersService } from './users.service';
   model: {
     type: User,
   },
+  query: {
+    join: {
+      posts: {
+        eager: true,
+      },
+    },
+  },
 })
 @Controller('api/users')
 export class UsersController {

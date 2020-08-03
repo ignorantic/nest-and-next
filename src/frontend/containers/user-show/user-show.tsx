@@ -9,7 +9,7 @@ import {
 import NextLink from 'next/link';
 
 import { useShowController } from '../../lib/redux-resourcify';
-import { CommonPost } from '../../../common/interfaces';
+import { CommonUser } from '../../../common/interfaces';
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbs: {
@@ -28,17 +28,18 @@ const useStyles = makeStyles((theme) => ({
 
 interface PostShowProps {
   id?: number;
-  post?: CommonPost;
+  user?: CommonUser;
 }
 
-const PostShow: NextPage<PostShowProps> = (props) => {
-  const { id, post } = props;
+const UserShow: NextPage<PostShowProps> = (props) => {
+  const { id, user } = props;
+  console.log('user', user);
 
   const {
-    record = post,
-  } = useShowController<CommonPost>({
-    basePath: '/posts',
-    resource: 'posts',
+    record = user,
+  } = useShowController<CommonUser>({
+    basePath: '/users',
+    resource: 'users',
     id,
   });
 
@@ -47,8 +48,8 @@ const PostShow: NextPage<PostShowProps> = (props) => {
   return (
     <Container>
       <section className={classes.breadcrumbs}>
-        <NextLink href="/posts" as="/posts" passHref>
-          <Link>Posts</Link>
+        <NextLink href="/users" as="/users" passHref>
+          <Link>Users</Link>
         </NextLink>
       </section>
       <section className={classes.post}>
@@ -56,9 +57,11 @@ const PostShow: NextPage<PostShowProps> = (props) => {
           <Fragment>
             <Typography component="h6" variant="h6">
               {`#${record.id}: `}
-              {record.title}
+              {record.firstName}
+              {' '}
+              {record.lastName}
             </Typography>
-            <Typography>{record.text}</Typography>
+            <Typography variant="subtitle1">{record.email}</Typography>
           </Fragment>
         )}
       </section>
@@ -66,4 +69,4 @@ const PostShow: NextPage<PostShowProps> = (props) => {
   );
 };
 
-export default PostShow;
+export default UserShow;
