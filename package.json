@@ -30,12 +30,14 @@
     "@nestjsx/crud-typeorm": "^4.6.2",
     "@reduxjs/toolkit": "^1.4.0",
     "@svgr/webpack": "^5.4.0",
+    "@tanem/react-nprogress": "^3.0.37",
     "@types/next-redux-wrapper": "^3.0.0",
     "@types/ramda": "^0.27.11",
     "@types/react-redux": "^7.1.9",
     "@types/redux": "^3.6.0",
     "@types/redux-saga": "^0.10.5",
     "@types/redux-thunk": "^2.1.0",
+    "@types/uuid": "^8.0.0",
     "class-transformer": "^0.2.3",
     "consola": "^2.14.0",
     "cross-env": "^6.0.3",
@@ -61,7 +63,8 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.2",
     "typeorm": "^0.2.25",
-    "typeorm-seeding": "^1.6.1"
+    "typeorm-seeding": "^1.6.1",
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",

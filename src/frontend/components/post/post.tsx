@@ -36,11 +36,11 @@ const Post: NextPage<PostProps> = (props) => {
       </Typography>
       <Typography>
         {'by '}
-        <NextLink href="/users/[id]" as={`/users/${post.user.id}`} passHref>
+        <NextLink href="/users/[id]" as={`/users/${post.user?.id}`} passHref>
           <Link>
-            {post.user.firstName}
+            {post.user?.firstName}
             {' '}
-            {post.user.lastName}
+            {post.user?.lastName}
           </Link>
         </NextLink>
       </Typography>

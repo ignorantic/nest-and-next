@@ -2,9 +2,11 @@ import React, { ComponentType } from 'react';
 import NextApp, { AppContext, AppInitialProps } from 'next/app';
 import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
 import { is } from 'ramda';
+import { v4 as uuidv4 } from 'uuid';
 
 import theme from '../frontend/theme';
 import Layout from '../frontend/layout';
+import Loading from '../frontend/components/loading/loading';
 
 interface AppProps extends AppInitialProps {
   Component: ComponentType;
@@ -19,8 +21,31 @@ class App extends NextApp<AppProps> {
     return { pageProps };
   }
 
+  public state = {
+    isRouteChanging: false,
+    loadingKey: null,
+  }
+
   componentDidMount(): void {
     removeJssStyles();
+    const { router } = this.props;
+
+    const routeChangeStartHandler = () => {
+      this.setState(() => ({
+        isRouteChanging: true,
+        loadingKey: uuidv4().substr(0, 8),
+      }));
+    };
+
+    const routeChangeEndHandler = () => {
+      this.setState(() => ({
+        isRouteChanging: false,
+      }));
+    };
+
+    router.events.on('routeChangeStart', routeChangeStartHandler);
+    router.events.on('routeChangeComplete', routeChangeEndHandler);
+    router.events.on('routeChangeError', routeChangeEndHandler);
   }
 
   render(): JSX.Element {
@@ -37,6 +62,7 @@ class App extends NextApp<AppProps> {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
+        <Loading {...this.state} />
         <Layout>
           <Component {...pageProps} />
         </Layout>
