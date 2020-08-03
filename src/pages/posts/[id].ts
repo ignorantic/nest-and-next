@@ -2,6 +2,7 @@ import { createElement } from 'react';
 import { NextPage, NextPageContext } from 'next';
 import PostShow from '../../frontend/containers/post-show';
 import { isCommonPost, isID } from '../../common/guards';
+import { wrapper } from '../../frontend/store';
 
 interface PostShowPageProps {
   id: number;
@@ -18,4 +19,4 @@ PostShowPage.getInitialProps = ({ query }: NextPageContext) => {
   return ({ id });
 };
 
-export default PostShowPage;
+export default wrapper.withRedux(PostShowPage);

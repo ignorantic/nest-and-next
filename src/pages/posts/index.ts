@@ -4,6 +4,7 @@ import { NextPage, NextPageContext } from 'next';
 import PostList from '../../frontend/containers/post-list';
 import { isCommonPostList } from '../../common/guards';
 import { CRUD_GET_LIST_SUCCESS, registerResource } from '../../frontend/lib/redux-resourcify';
+import { wrapper } from '../../frontend/store';
 
 const PostListPage: NextPage = () => createElement(PostList);
 
@@ -40,4 +41,4 @@ PostListPage.getInitialProps = ({ query, store, res }: NextPageContext) => {
   return {};
 };
 
-export default PostListPage;
+export default wrapper.withRedux(PostListPage);

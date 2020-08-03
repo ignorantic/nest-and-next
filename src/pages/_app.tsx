@@ -3,7 +3,6 @@ import NextApp, { AppContext, AppInitialProps } from 'next/app';
 import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
 import { is } from 'ramda';
 
-import { wrapper } from '../frontend/store';
 import theme from '../frontend/theme';
 import Layout from '../frontend/layout';
 
@@ -25,9 +24,15 @@ class App extends NextApp<AppProps> {
   }
 
   render(): JSX.Element {
-    const { Component } = this.props;
+    const { Component, router } = this.props;
 
     const pageProps = getValidPageProps(this.props.pageProps);
+
+    const { route } = router;
+
+    if (route === '/admin') {
+      return <Component {...pageProps} />;
+    }
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -40,7 +45,7 @@ class App extends NextApp<AppProps> {
   }
 }
 
-export default wrapper.withRedux(App);
+export default App;
 
 function removeJssStyles(): void {
   const jssStyles = document.querySelector('#jss-server-side');
