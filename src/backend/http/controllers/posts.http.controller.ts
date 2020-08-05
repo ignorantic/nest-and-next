@@ -13,7 +13,7 @@ export class PostsHttpController {
   @Render('posts')
   @Get('posts')
   public async postList(@Query() query: PostsPaginationDto): Promise<{ data, totalCount, page }> {
-    const { data, totalCount } = await this.postsService.findAll({
+    const { data, totalCount } = await this.postsService.getList({
       ...query,
       page: Number(query.page) || 1,
       limit: Number(query.limit) || 10,
@@ -25,7 +25,7 @@ export class PostsHttpController {
   @Render('posts/[id]')
   @Get('posts/:id')
   public async post(@Param('id') id?: string): Promise<{ id, data }> {
-    const data = await this.postsService.findOne(id);
+    const data = await this.postsService.getOneEntity(id);
     return { id, data };
   }
 }

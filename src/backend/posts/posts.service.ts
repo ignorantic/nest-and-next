@@ -12,7 +12,7 @@ export class PostsService extends TypeOrmCrudService<Post> {
     super(repo);
   }
 
-  async findAll(postPaginationDto: PostsPaginationDto): Promise<PostsPaginatedResultDto> {
+  async getList(postPaginationDto: PostsPaginationDto): Promise<PostsPaginatedResultDto> {
     const skippedItems = (postPaginationDto.page - 1) * postPaginationDto.limit;
 
     const totalCount = await this.repo.count();
@@ -28,5 +28,12 @@ export class PostsService extends TypeOrmCrudService<Post> {
       limit: postPaginationDto.limit,
       data: posts,
     };
+  }
+
+  async getOneEntity(id: string): Promise<Post> {
+    return this.repo.createQueryBuilder('post')
+      .leftJoinAndSelect('post.user', 'user')
+      .where('post.id = :id', { id })
+      .getOne();
   }
 }
