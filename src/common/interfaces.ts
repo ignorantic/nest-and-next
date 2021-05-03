@@ -2,7 +2,6 @@ export interface CommonPost {
   id: number;
   title: string;
   text: string;
-  user: CommonUser;
   isActive: boolean;
 }
 

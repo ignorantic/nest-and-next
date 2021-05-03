@@ -34,16 +34,6 @@ const Post: NextPage<PostProps> = (props) => {
           <Link>{post.title}</Link>
         </NextLink>
       </Typography>
-      <Typography>
-        {'by '}
-        <NextLink href="/users/[id]" as={`/users/${post.user?.id}`} passHref>
-          <Link>
-            {post.user?.firstName}
-            {' '}
-            {post.user?.lastName}
-          </Link>
-        </NextLink>
-      </Typography>
       <Typography>{post.text}</Typography>
     </div>
   );

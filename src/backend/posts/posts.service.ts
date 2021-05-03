@@ -17,7 +17,6 @@ export class PostsService extends TypeOrmCrudService<Post> {
 
     const totalCount = await this.repo.count();
     const posts = await this.repo.createQueryBuilder('post')
-      .leftJoinAndSelect('post.user', 'user')
       .offset(skippedItems)
       .limit(postPaginationDto.limit)
       .getMany();
@@ -32,7 +31,6 @@ export class PostsService extends TypeOrmCrudService<Post> {
 
   async getOneEntity(id: string): Promise<Post> {
     return this.repo.createQueryBuilder('post')
-      .leftJoinAndSelect('post.user', 'user')
       .where('post.id = :id', { id })
       .getOne();
   }

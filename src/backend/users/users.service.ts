@@ -17,7 +17,6 @@ export class UsersService extends TypeOrmCrudService<User> {
 
     const totalCount = await this.repo.count();
     const users = await this.repo.createQueryBuilder('user')
-      .leftJoinAndSelect('user.posts', 'posts')
       .offset(skippedItems)
       .limit(postPaginationDto.limit)
       .getMany();

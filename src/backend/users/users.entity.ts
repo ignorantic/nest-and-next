@@ -1,7 +1,6 @@
 import {
-  Entity, Column, PrimaryGeneratedColumn, OneToMany,
+  Entity, Column, PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Post } from '../posts/posts.entity';
 
 @Entity()
 export class User {
@@ -16,9 +15,6 @@ export class User {
 
   @Column()
   email: string;
-
-  @OneToMany((type) => Post, (post) => post.user)
-  posts: Post[];
 
   @Column({ default: true })
   isActive: boolean;
