@@ -1,0 +1,67 @@
+version: '3.7'
+
+services:
+  nginx:
+    container_name: nn_nginx
+    image: nginx:alpine
+    ports:
+      - 80:80
+    networks:
+      - webnet
+    depends_on:
+      - nestjs
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ${STATIC_PATH}:/www/public
+  nestjs:
+    container_name: nn_nestjs
+    links:
+      - mysql
+    build:
+      context: .
+      target: development
+    user: ${UID}
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${NEST_PORT}:${NEST_PORT}
+      - 9229:9229
+    command: yarn dev
+    env_file:
+      - .env
+    networks:
+      - webnet
+    depends_on:
+      - mysql
+  mysql:
+    container_name: nn_mysql
+    image: mysql:5
+    restart: always
+    environment:
+      MYSQL_HOST: nn_mysql
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    ports:
+      - 3306:3306
+    networks:
+      - webnet
+    volumes:
+      - ${DB_PATH}:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: nn_pma
+    links:
+      - mysql
+    environment:
+      PMA_HOST: nn_mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+    networks:
+      - webnet
+networks:
+  webnet:

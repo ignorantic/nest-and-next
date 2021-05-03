@@ -1,5 +1,5 @@
 {
-  "watch": ["src/server/**/*"],
+  "watch": ["src/backend/**/*"],
   "ext": "ts,tsx",
   "execMap": {
     "ts": "ts-node --project tsconfig.backend.json"
